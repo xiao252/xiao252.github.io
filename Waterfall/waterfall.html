@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流demo</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        .box{position: relative;margin: auto;transition: all .5s ease-out;}
+        .box div{float:left;text-align: center;transition: all .5s ease-out;margin: 10px;}
+        .w1{width: 100px;height: 240px;background: #f44336;}
+        .w2{width: 100px;height: 100px;background: #2196f3;}
+        .w3{width: 100px;height: 300px;background: #ffc107;}
+        .w4{width: 100px;height: 400px;background: #009688;}
+        .w5{width: 100px;height: 70px;background: #ff9800;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w2"></div>
+        <div class="w4"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+        <div class="w1"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w2"></div>
+        <div class="w3"></div>
+        <div class="w4"></div>
+        <div class="w4"></div>
+        <div class="w5"></div>
+    </div>
+    <script>
+        var boxDivWidth = 0,//元素的宽度
+            boxArr = [],//存放每列的高度
+            columnCount = 0,//共有几列
+            boxDiv = Array.prototype.slice.call($('.box div'));//所有子元素的 NodeList
+        //页面加载完成执行
+        window.addEventListener('load',function(){
+            resort();
+        });
+        //视口大小改变执行
+        window.addEventListener('resize',function(){
+            resort();
+        });
+        function resort(){
+            boxDivWidth = getWidth(boxDiv[0]);//获取单个子元素宽度
+            columnCount = Math.floor((window.innerWidth-20) / boxDivWidth);//-20 视口宽度是为了不显示水平滚动条
+            $('.box')[0].style.cssText = 'width:'+boxDivWidth*columnCount+'px;';//计算最外层父元素 宽度 + margin 实现水平居中
+            boxArr=[];
+            for(var i=0;i<columnCount;i++){ //为每列赋初值
+                boxArr[i] = 0;
+            }
+            boxDiv.forEach(function(item){ //转换伪数组 遍历 每个子元素
+                var divItemHeight = getHeight(item);
+                var minValue = boxArr[0]; //高度最低列 的值
+                var minIndex = 0;         //高度最低列 的索引
+                for(var i=0;i<columnCount;i++){
+                    if(boxArr[i]<minValue){//查找 高度最低的列
+                        minValue = boxArr[i];
+                        minIndex = i;
+                    }
+                }
+                item.style.cssText = 'position:absolute;left:'+minIndex*boxDivWidth+'px;top:'+minValue+'px;';//设置元素 left top 定位
+                boxArr[minIndex] += divItemHeight;//对应列加上新增的 高度
+            });
+        }
+        function $(domtext){
+            return document.querySelectorAll(domtext);
+        }
+        function getWidth(dom){
+            var style = getComputedStyle(dom);//getComputedStyle方法可以获取 外部样式表中的样式
+            return parseInt(style.marginLeft.slice(0,-2))+parseInt(style.marginRight.slice(0,-2))+dom.offsetWidth;
+        }
+        function getHeight(dom){
+            var style = getComputedStyle(dom);
+            return parseInt(style.marginTop.slice(0,-2)) + parseInt(style.marginBottom.slice(0,-2))+dom.offsetHeight;
+        }
+    </script>
+</body>
+</html>
