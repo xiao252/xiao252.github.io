@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>360图片导航拖动排序效果</title>
+<style>
+	*{margin: 0;padding: 0;}
+	.item img{
+		width: 100%;
+		height: 100%;
+	}
+	.item{
+        border-radius: 5px;
+        overflow: hidden;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+    <div class="item-box">
+        <div class="item">
+            <img url="images/5173.png" />
+        </div>
+        <div class="item">
+            <img url="images/baidu.png" />
+        </div>
+        <div class="item">
+            <img url="images/baixing.png" />
+        </div>
+        <div class="item">
+            <img url="images/dazhong.png" />
+        </div>
+        <div class="item">
+            <img url="images/douban.png" />
+        </div>
+        <div class="item">
+            <img url="images/fenghuang.png" />
+        </div>
+        <div class="item">
+            <img url="images/lvmama.png" />
+        </div>
+        <div class="item">
+            <img url="images/qzone.png" />
+        </div>
+        <div class="item">
+            <img url="images/renren.png" />
+        </div>
+        <div class="item">
+            <img url="images/souhu.png" />
+        </div>
+        <div class="item">
+            <img url="images/taobao.png" />
+        </div>
+        <div class="item">
+            <img url="images/wangyi.png" />
+        </div>
+    </div>
+    <script src="./js/DragSort.js"></script>
+	<script>
+    DragSort({
+        el:".item",
+        imgWidth:300,
+        imgHeight:180,
+        imgMargin:10,
+        colNumber:4,
+        onAlternate:function (oldIndex,index) {
+            console.log('返回当前元素位置索引。原始位置索引:',oldIndex,"，当前位置索引:",index);
+        }
+    });
+	</script>
+</body>
+</html>
