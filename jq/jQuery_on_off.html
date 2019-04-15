@@ -37,16 +37,16 @@
     $('#b1').on('click',function(){
         console.log('绑定成功!')
     })
-    var count = 4;
-    (function time(){//3秒后移除事件
-        $('.time').node.innerHTML = count+'秒后移除事件';
-        if(count-- != 0){
-            setTimeout(time,1000)
-        }else{
-            $('.time').node.innerHTML = '移除事件.';
-            $('#b1').off('click');
-        }
-    })()
+    //var count = 4;
+    //(function time(){//3秒后移除事件
+    //    $('.time').node.innerHTML = count+'秒后移除事件';
+    //    if(count-- != 0){
+    //        setTimeout(time,1000)
+    //    }else{
+    //        $('.time').node.innerHTML = '移除事件.';
+    //        $('#b1').off('click');
+    //    }
+    //})()
     </script>
 </body>
 </html>
