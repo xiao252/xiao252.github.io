@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>jQuery：on和off的实现</title>
+</head>
+<body>
+    <button id="b1">btn1</button>
+    <hr/>
+    <div class="time">div3</div>
+    <script>
+    ;(function(win,dom){
+        var jQuery = function(nodeStr){
+            if(!(this instanceof jQuery)) return new jQuery(nodeStr);
+            this.node = dom.querySelector(nodeStr);
+            this.nodeName = nodeStr;
+        }
+        jQuery.prototype.EventBox = {};
+        jQuery.prototype.on = function(eventString,fun){
+            if(typeof this.EventBox[this.nodeName]!='undefined'){
+                this.EventBox[this.nodeName][eventString] = fun;
+            }else{
+                this.EventBox[this.nodeName] = {[eventString]:fun};
+            }
+            this.node.addEventListener(eventString,this.EventBox[this.nodeName][eventString]);
+        } 
+        jQuery.prototype.off = function(eventString){
+            if(typeof this.EventBox[this.nodeName]!='undefined'){
+                this.node.removeEventListener(eventString,this.EventBox[this.nodeName][eventString]);
+            }
+        }           
+        win.$=jQuery;
+    })(window,document)
+    $('#b1').on('click',function(){
+        console.log('绑定成功!')
+    })
+    var count = 4;
+    (function time(){//3秒后移除事件
+        $('.time').node.innerHTML = count+'秒后移除事件';
+        if(count-- != 0){
+            setTimeout(time,1000)
+        }else{
+            $('.time').node.innerHTML = '移除事件.';
+            $('#b1').off('click');
+        }
+    })()
+    </script>
+</body>
+</html>
