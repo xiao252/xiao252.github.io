@@ -149,7 +149,7 @@
             stageBox.scale.set(window.innerWidth/draftWidth);//容器根据设计稿 计算缩放
             
             //设置动画
-            tm.to(stageBox,10,{y:stageBox.y-3000*4,ease:Bounce.Linear},0);
+            tm.to(stageBox,10,{y:-(stageBox.height-window.innerHeight), ease:Power0.easeIn},0);
             tm.to(spriteBox.bd,0.3,{y:spriteBox.bd.y+50,ease:Bounce.Linear},0.05);
             tm.to(spriteBox.text1.scale,0.15,{x:1,y:1,ease:Bounce.Linear},0.00);
             tm.to(spriteBox.text4.scale,0.15,{x:1,y:1,ease:Bounce.Linear},0.1);
@@ -163,6 +163,7 @@
             timeline = 0
             setTime=null;
         document.addEventListener('touchstart',function(e){
+            console.log()
             clearInterval(setTime);
             touchstart = true;
             touchstartY = e.changedTouches[0].clientY;
@@ -171,15 +172,14 @@
             if(!touchstart){return;}
 
             var touchmoveY = e.changedTouches[0].clientY;
-            steptime = -(touchmoveY-touchstartY);
+            steptime = -(touchmoveY-touchstartY)/1000;
             var time = timeline+=steptime;
 
             if(time < 0) timeline = 0;
-            if(time > 8631)timeline = 8631;
-
-            console.log(timeline)
+            if(time >= 10) timeline = 10;
+           
             range();
-            tm.seek(timeline/2000);//跳转到对应时间
+            tm.seek(timeline);//跳转到对应时间
             renderer.render(stageBox);//渲染场景
             touchstartY = touchmoveY;
         })
@@ -188,36 +188,37 @@
             setTime = setInterval(() => {
 
                 steptime*=0.95;
-
-                if(Math.abs(steptime)<1){
+                
+                if(Math.abs(steptime)<1/1000){
                     clearInterval(setTime)
                 }
                
                 var time = timeline+=steptime;
 
                 if(time < 0) timeline = 0;
-                if(time > 8631)timeline = 8631;
+                if(time >= 10) timeline = 10;
+                
                 range();
-                tm.seek(timeline/2000);
+                tm.seek(timeline);
                 renderer.render(stageBox);
             },10);
         })
 
         function range(){
-            if(timeline >1 && timeline <= 413){
+            if(timeline >0.001 && timeline <= 0.313){
                 document.querySelector('#music0').play();
-                spriteBox.bd.gotoAndStop(timeline/60);
+                spriteBox.bd.gotoAndStop(timeline*14);
             }else{
                 document.querySelector('#music0').pause();
                 document.querySelector('#music0').currentTime=0;
             }
-            if(timeline>413 && timeline<=670){
+            if(timeline>0.413 && timeline<=0.670){
                 document.querySelector('#music1').play();
             }else{
                 document.querySelector('#music1').pause();
                 document.querySelector('#music1').currentTime=0;
             }
-            if(timeline>670 && timeline<=1301){
+            if(timeline>0.670 && timeline<=1.301){
                 
                 document.querySelector('#music2').play();
             }else{
