@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        html,body{width: 100%;height: 100%;touch-action: none; }
+        #main{height: 100%;width: 100%;background: url('');background-size: 100% 100%;position: absolute;left: 0;top: 0;z-index: 2;}
+        .sequence{width: 100%;height: 100%;position: absolute;left: 0;top: 0;z-index: 3;}
+    </style>
+    <script src="./js/jqlite.min.js"></script>
+    <script src="./js/css3d.min.js"></script>
+    <script src="./js/jstween.min.js"></script>
+    <script src="./js/jstimeline.min.js"></script>
+    <script src="./js/alloy_finger.js"></script>
+    <script src="./js/pxloader-all.min.js"></script>
+</head>
+<body>
+    <audio src="./media/bg.mp3" autoplay loop></audio>
+    <img src="./images/sequence/motion1.jpg" class="sequence" alt="">
+    <div id="main"></div>
+    <script>
+        //兼容性开始
+        requestAnimationFrame = 
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame || 
+        window.oRequestAnimationFrame ||
+        function (callback) {setTimeout(callback, 1000 / 60);};
+        //兼容性结束
+        var assets = {
+            frontscene:[
+                {url:'./images/frontscene/p1.png'},
+                {url:'./images/frontscene/p2.png'},
+                {url:'./images/frontscene/p3.png'},
+                {url:'./images/frontscene/p4.png'},
+                {url:'./images/frontscene/p5.png'},
+                {url:'./images/frontscene/p6.png'},
+                {url:'./images/frontscene/p7.png'},
+                {url:'./images/frontscene/p8.png'},
+                {url:'./images/frontscene/p9.png'},
+                {url:'./images/frontscene/p10.png'},
+                {url:'./images/frontscene/p11.png'},
+                {url:'./images/frontscene/p12.png'},
+                {url:'./images/frontscene/p13.png'},
+                {url:'./images/frontscene/p14.png'},
+                {url:'./images/frontscene/p15.png'},
+                {url:'./images/frontscene/p16.png'},
+                {url:'./images/frontscene/p17.png'},
+                {url:'./images/frontscene/p18.png'},
+                {url:'./images/frontscene/p19.png'},
+                {url:'./images/frontscene/p20.png'},
+            ],
+            middlescene:[
+                {url:'./images/middlescene/p1.png'},
+                {url:'./images/middlescene/p2.png'},
+                {url:'./images/middlescene/p3.png'},
+                {url:'./images/middlescene/p4.png'},
+                {url:'./images/middlescene/p5.png'},
+                {url:'./images/middlescene/p6.png'},
+                {url:'./images/middlescene/p7.png'},
+                {url:'./images/middlescene/p8.png'},
+                {url:'./images/middlescene/p9.png'},
+                {url:'./images/middlescene/p10.png'},
+                {url:'./images/middlescene/p11.png'},
+                {url:'./images/middlescene/p12.png'},
+                {url:'./images/middlescene/p13.png'},
+                {url:'./images/middlescene/p14.png'},
+                {url:'./images/middlescene/p15.png'},
+                {url:'./images/middlescene/p16.png'},
+                {url:'./images/middlescene/p17.png'},
+                {url:'./images/middlescene/p18.png'},
+                {url:'./images/middlescene/p19.png'},
+                {url:'./images/middlescene/p20.png'},
+            ],
+            scene2:[
+                {url:'./images/scene2/p1.png'},
+                {url:'./images/scene2/p2.png'},
+                {url:'./images/scene2/p3.png'},
+                {url:'./images/scene2/p4.png'},
+                {url:'./images/scene2/p5.png'},
+                {url:'./images/scene2/p6.png'},
+                {url:'./images/scene2/p7.png'},
+                {url:'./images/scene2/p8.png'},
+                {url:'./images/scene2/p9.png'},
+                {url:'./images/scene2/p10.png'},
+                {url:'./images/scene2/p11.png'},
+                {url:'./images/scene2/p12.png'},
+                {url:'./images/scene2/p13.png'},
+                {url:'./images/scene2/p14.png'},
+                {url:'./images/scene2/p15.png'},
+                {url:'./images/scene2/p16.png'},
+                {url:'./images/scene2/p17.png'},
+                {url:'./images/scene2/p18.png'},
+                {url:'./images/scene2/p19.png'},
+                {url:'./images/scene2/p20.png'},
+            ],
+            ui:[
+                {url:'./images/ui/btn1_light.png'},
+                {url:'./images/ui/btn1.png'},
+                {url:'./images/ui/cloud1.png'},
+                {url:'./images/ui/logo.png'},
+                {url:'./images/ui/logo1.png'},
+                {url:'./images/ui/thumb5.png'},
+            ]
+        }
+        var loadingDOM =  $('.sequence');
+        var loadingindex = {index:1};
+        var width = 129;
+        var height = 1304;
+        var _r = R({width:width,number:assets.frontscene.length});
+        //创建舞台
+        function createStage(){
+            var _stage = new C3D.Stage();
+            _stage.position(0,0,0).size(window.innerWidth, window.innerHeight).material({
+                image:'./images/ui/front.jpg',
+                size:'100% 100%'
+            }).update();
+            document.getElementById('main').appendChild(_stage.el);
+            return _stage;
+        }
+         //往 场景1 添加元素
+        function createScren1(){
+            var scren = new C3D.Sprite();
+            var animat=[];
+            for(var item in assets.scene2){
+                var _x = (0 + Math.sin((2*Math.PI / 360) * item*18) * _r);
+                var _z = (0 + Math.cos((2*Math.PI / 360) * item*18) * -_r);
+                var _ry = -item*18;
+                var _plane = new C3D.Plane();
+                _plane
+                .size(width,height)
+                .scale(1,0)
+                .position(_x,0,_z).rotation(0,_ry,0).material({
+                    image:assets.scene2[item].url,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+                scren.addChild(_plane);
+            }
+            
+            scren.position(0,0,0).rotation(0,0,0).scale(1).update();
+            return scren;
+        }
+        //往 场景2 添加元素
+        function createScren2(){
+            var scren = new C3D.Sprite();
+            for(var item in assets.middlescene){
+                var _x = (0 + Math.sin((2*Math.PI / 360) * item*18) * _r);
+                var _z = (0 + Math.cos((2*Math.PI / 360) * item*18) * -_r);
+                var _ry = -item*18;
+                var _plane = new C3D.Plane();
+                _plane
+                .size(width,height)
+                .scale(1,0)
+                .position(_x,0,_z).rotation(0,_ry,0).material({
+                    image:assets.middlescene[item].url,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+                scren.addChild(_plane);
+            }
+            scren.position(0,0,0).rotation(0,0,0).scale(0.9).update();
+            return scren;
+        }
+        //往 场景3 添加元素
+        function createScren3(){
+            var scren = new C3D.Sprite();
+            for(var item in assets.frontscene){
+                var _x = (0 + Math.sin((2*Math.PI / 360) * item*18) * _r);
+                var _z = (0 + Math.cos((2*Math.PI / 360) * item*18) * -_r);
+                var _ry = -item*18;
+                var _plane = new C3D.Plane();
+                _plane
+                .size(width,height)
+                .scale(1,0)
+                .position(_x,0,_z).rotation(0,_ry,0).material({
+                    image:assets.frontscene[item].url,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+
+                scren.addChild(_plane);
+            }
+            scren.position(0,0,0).rotation(0,0,0).scale(0.8).update();
+            return scren;
+        }
+        //往 场景4 添加元素
+        function createScren4(){
+            var scren = new C3D.Sprite();
+            var _plane = new C3D.Plane();
+            _plane
+            .size(600,600)
+            .scale(1)
+            .position(0,-height/2.5,0).rotation(-90+180,0,0).material({
+                image:assets.ui[4].url,
+                size:'100% 100%', 
+                bothsides:true
+            }).update();
+            scren.addChild(_plane);
+            scren.position(0,0,0).rotation(0,0,0).scale(1).update();
+            return scren;
+        }
+        //往 场景5 添加元素
+        function createScren5(){
+            var scren = new C3D.Sprite();
+            var _plane = new C3D.Plane();
+                _plane
+                .size(600,600)
+                .position(0,height/2.5,0).rotation(90,0,0).material({
+                    image:assets.ui[3].url,
+                    size:'100% 100%', 
+                    bothsides:true
+                }).update();
+                scren.addChild(_plane);
+            for(var i=1;i<=3;i++){
+                var _plane = new C3D.Plane();
+                _plane.originZ = -250;
+                _plane
+                .size(313,140)
+                .position(0,height/2.2,0).rotation(0,i*90+180,0).material({
+                    image:assets.ui[2].url,
+                    size:'100% 100%', 
+                    bothsides:true
+                }).update();
+                
+                scren.addChild(_plane);
+            }
+            scren.position(0,0,0).rotation(0,0,0).update();
+            return scren;
+        }
+        //往 场景6 添加元素
+        function createScren6(){
+            var continnerScren = new C3D.Sprite();
+            for(var i=0;i<4;i++){
+                var item = createSpri(assets.ui[5].url,i).rotation(0,i*90).position(0,(Math.random()*400 - 200),0).update();
+                continnerScren.addChild(item);
+            }
+            continnerScren.update();
+            function createSpri(imgUrl,index){
+                var scren = new C3D.Sprite();
+                var _plane1_2_t = new C3D.Plane();
+                _plane1_2_t.size(404,78)
+                .position(0,-78/2,-220).rotation(0,0,0).origin(0).material({
+                    image:imgUrl,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+                scren.addChild(_plane1_2_t);
+
+                var _plane1_1 = new C3D.Plane();
+                _plane1_1.size(78,78)
+                .position(0,0,-220).rotation(0,0,0).material({
+                    image:assets.ui[1].url,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+                scren.addChild(_plane1_1);
+
+                var _plane1_2 = new C3D.Plane();
+                _plane1_2.size(78,78)
+                .position(0,0,-220).rotation(0,0,0).material({
+                    image:assets.ui[0].url,
+                    size:'100% 100%', 
+                    bothsides:false
+                }).update();
+                scren.addChild(_plane1_2);
+
+                JT.to(_plane1_2,.6,{scaleX:0.5,scaleY:0.5,delay:(Math.random()*1.5),repeat:-1,yoyo:true,ease:JT.Quad.InOut,onUpdate:function(){
+                    _plane1_2.update();
+                }});
+
+                var tml = JTL.create({delay:(Math.random()*1.5),onEnd:function(){
+                    tml.play(0);
+                }});
+                tml.to(_plane1_2_t,.5,{scaleX:0,ease:JT.Quad.InOut,onUpdate:function(){
+                    _plane1_2_t.update();
+                }},'+=0');
+                tml.to(_plane1_2_t,.5,{scaleX:1,ease:JT.Quad.InOut,onUpdate:function(){
+                    _plane1_2_t.update();
+                }},'+=0');
+                tml.to(_plane1_2_t,3,{scaleX:1,ease:JT.Quad.InOut,onUpdate:function(){
+                    _plane1_2_t.update();
+                }},'+=0');
+                _plane1_1.on('click',function(){
+                    iconItemClick(index)
+                })
+                _plane1_2.on('click',function(){
+                    iconItemClick(index)
+                })
+                _plane1_2_t.on('click',function(){
+                    iconItemClick(index)
+                })
+                tml.play(0);
+
+                scren.position(0,0,0).rotation(0,0,0).update();
+                return scren;
+            }
+            return continnerScren;
+        }
+
+        function iconItemClick(index){
+            console.log(index)
+        }
+
+        var _mz = -200;
+        var _stage = createStage();
+        var _scren1 = createScren1();
+        var _scren2 = createScren2();
+        var _scren3 = createScren3();
+        var _scren4 = createScren4();
+        var _scren5 = createScren5();
+        var _scren6 = createScren6();
+        var timeline = JTL.create();
+        var screnContainer = new C3D.Sprite();
+        screnContainer.addChild(_scren1);
+        screnContainer.addChild(_scren2);
+        screnContainer.addChild(_scren3);
+        screnContainer.addChild(_scren4);
+        screnContainer.addChild(_scren5);
+        screnContainer.addChild(_scren6);
+        screnContainer.position(0,0,_mz).rotation(0,0,0).update();
+        _stage.addChild(screnContainer);
+        //初始动画
+        var startAni = JT.to(loadingindex,8,{
+            index:223,
+            isPlaying:false,
+            onUpdate:function(){
+                loadingDOM.attr('src','./images/sequence/motion'+(~~(loadingindex.index))+'.png');
+            },
+            onEnd:function(){
+                 loadingDOM.remove();
+                 timeline.play();
+            }
+        })
+        timeline.to(screnContainer,3,{
+            rotationY:360+50,
+            ease:JT.Quad.InOut,
+            onUpdate:function(){
+                screnContainer.updateT();
+            }
+        },0)
+        _scren1.children.forEach(function(item,index){
+            timeline.to(item,2,{
+                scaleY:1,
+                delay:index/15,
+                ease:JT.Quad.Out,
+                onUpdate:function(){
+                    item.update();
+                }
+            },0.5)
+        })
+        _scren2.children.forEach(function(item,index){
+            timeline.to(item,2,{
+                scaleY:1,
+                delay:index/15,
+                ease:JT.Quad.Out,
+                onUpdate:function(){
+                    item.update();
+                }
+            },0.5)
+        })
+        _scren3.children.forEach(function(item,index){
+            timeline.to(item,2,{
+                scaleY:1,
+                delay:index/15,
+                ease:JT.Quad.Out,
+                onUpdate:function(){
+                    item.update();
+                }
+            },0.5)
+        })
+        timeline.fromTo(_scren4,3,{
+            y:800,
+            z:-800,
+            rotationY:0,
+            ease:JT.Quad.InOut
+        },{
+            y:0,
+            z:0,
+            rotationY:360,
+            ease:JT.Quad.InOut,
+            onUpdate:function(){
+                _scren4.update();
+            }
+        },0)
+        timeline.fromTo(_scren5,3,{
+            rotationY:0,
+            y:-800,
+            z:-800,
+            ease:JT.Quad.InOut
+        },{
+            y:0,
+            z:0,
+            rotationY:360,
+            ease:JT.Quad.InOut,
+            onUpdate:function(){
+                _scren5.update();
+            }
+        },0)
+        timeline.fromTo(_scren6,3,{
+            scaleY:0,
+            rotationY:0,
+            ease:JT.Quad.InOut
+        },{
+            scaleY:1,
+            rotationY:360,
+            ease:JT.Quad.InOut,
+            onUpdate:function(){
+                _scren6.update();
+            }
+        },0)
+        //初始动画 end
+        var r_y = 0;
+        var r_x = 0;
+        var reAni = null;
+        var startPoint = {x:0,y:0,stepX:0,stepY:0};
+        //触摸手势
+        var _alloyFinger = new AlloyFinger(document, {
+            touchEnd:function(){
+                reAni = requestAnimationFrame(go);
+            },
+            touchStart:function(e){
+                cancelAnimationFrame(reAni);
+                r_y = screnContainer.rotationY;
+                startPoint.x = e.targetTouches[0].screenX;
+                startPoint.y = e.targetTouches[0].screenY;
+            },
+            pressMove: function (e) {
+                startPoint.stepX = startPoint.x-e.touches[0].screenX;
+                startPoint.stepY = startPoint.y-e.touches[0].screenY;
+
+                JT.to(screnContainer,.6,{z:-(_mz+(Math.abs(startPoint.stepX)*800)),ease:JT.Quad.In,onUpdate:function(){
+                    screnContainer.updateT();
+                }});
+                JT.to(screnContainer,.6,{z:_mz,ease:JT.Quad.Out,onUpdate:function(){
+                    screnContainer.updateT();
+                }});
+
+                JT.to(screnContainer,.4,{rotationY:r_y,ease:JT.Quad.Out,onUpdate:function(){
+                    screnContainer.updateT();
+                }});
+
+                JT.to(screnContainer,.4,{rotationX:r_x,ease:JT.Quad.Out,onUpdate:function(){
+                    screnContainer.updateT();
+                }});
+
+                var _scrRY =function(scre,num){return startPoint.stepX>0?(scre.rotationY+num):(scre.rotationY-num);}
+                var _scrRX =function(scre,num){return startPoint.stepY>0?(scre.rotationY+num):(scre.rotationY-num);}
+                JT.to(_scren2,.15,{rotationY:_scrRY(_scren2,2),rotationX:_scrRX(_scren2,2),ease:JT.Quad.In,onUpdate:function(){
+                    _scren2.updateT();
+                }});
+                JT.to(_scren2,.4,{rotationY:0,rotationX:0,ease:JT.Quad.Out,onUpdate:function(){
+                    _scren2.updateT();
+                }});
+
+                JT.to(_scren3,.15,{rotationY:_scrRY(_scren3,4),rotationX:_scrRX(_scren3,4),ease:JT.Quad.In,onUpdate:function(){
+                    _scren3.updateT();
+                }});
+                JT.to(_scren3,.4,{rotationY:0,rotationX:0,ease:JT.Quad.Out,onUpdate:function(){
+                    _scren3.updateT();
+                }});
+                
+               
+                startPoint.x = e.targetTouches[0].screenX;
+                startPoint.y = e.targetTouches[0].screenY;
+                r_y += startPoint.stepX*0.3;
+                r_x -= startPoint.stepY*0.2;
+
+                if(r_x > 20)r_x=20;
+                if(r_x < -20)r_x=-20;
+
+            }
+        });
+        //触摸手势 end
+        function R(design){
+           return Math.round(
+               (design.width/2)
+               /
+               Math.tan(
+                    (Math.PI/180)
+                    *
+                    (360/design.number/2)
+               )
+            )
+        }
+        //响应屏幕调整尺寸
+        (function resize() {
+            _stage.size(window.innerWidth, window.innerHeight).update();
+            window.onresize = resize;
+        })();
+        //刷新函数
+        function go() {
+            screnContainer.rotation(screnContainer.rotationX,screnContainer.rotationY+0.1,0).updateT();
+            reAni = requestAnimationFrame(go);
+        }
+        go();
+    </script>
+    <script>
+        var baseUrl = location.origin; 
+
+        var loader = new PxLoader(); 
+        assets.frontscene.forEach(function(item){
+            loader.addImage(item.url);
+        })
+        assets.middlescene.forEach(function(item){
+            loader.addImage(item.url);
+        })
+        assets.scene2.forEach(function(item){
+            loader.addImage(item.url);
+        })
+        assets.ui.forEach(function(item){
+            loader.addImage(item.url);
+        })
+
+        loader.addProgressListener(function(e) { 
+            console.log(e.completedCount + ' / ' + e.totalCount); 
+        }); 
+        loader.addCompletionListener(function(){
+            startAni.play();
+        })
+        loader.start(); 
+    </script>
+</body>
+</html>

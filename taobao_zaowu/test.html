@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jstween.min.js"></script>
+    <script src="./js/jstimeline.min.js"></script>
+</head>
+<body>
+    <h1>dw</h1>
+    <script>
+        var dw = document.querySelector('h1');
+        var tml = JTL.create({onEnd:function(){
+            tml.play(0);
+        }});
+        tml.to(dw,1,{x:300},'+=0')
+        tml.to(dw,1,{x:0},'+=0')
+        tml.to(dw,3,{x:0},'+=0')
+        tml.play(0);
+    </script>
+</body>
+</html>
