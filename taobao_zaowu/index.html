@@ -330,10 +330,11 @@
             isPlaying:false,
             onUpdate:function(){
                 loadingDOM.attr('src','./images/sequence/motion'+(~~(loadingindex.index))+'.png');
+                //loadingDOM.attr('style','background:url(./images/sequence/motion'+(~~(loadingindex.index))+'.png) center / cover');
             },
             onEnd:function(){
-                 loadingDOM.remove();
-                 timeline.play();
+                loadingDOM.remove();
+                timeline.play();
             }
         })
         timeline.to(screnContainer,3,{
