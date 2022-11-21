@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-08-16T17:23:21.922Z</updated>
+  <updated>2022-11-21T14:00:43.297Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -18,17 +18,18 @@
   
   <entry>
     <title>音乐识别下载器 v2.0.5</title>
-    <link href="http://example.com/2022/08/17/music-down-v2.0.5/"/>
-    <id>http://example.com/2022/08/17/music-down-v2.0.5/</id>
+    <link href="http://example.com/2022/08/17/music-down-v2-0-5/"/>
+    <id>http://example.com/2022/08/17/music-down-v2-0-5/</id>
     <published>2022-08-16T16:46:37.000Z</published>
-    <updated>2022-08-16T17:23:21.922Z</updated>
+    <updated>2022-11-21T14:00:43.297Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;ul&gt;
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/2022/08/17/music-down-v2-0-5/image.png&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;修复已知问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;chrome版: &lt;a</summary>
