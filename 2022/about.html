@@ -74,8 +74,8 @@
        
     <div class="article-entry" itemprop="articleBody">
        
-  <p><img src="https://img-blog.csdnimg.cn/4e998997c23846f997560287de604f67.png" width="30" align='left' style="margin-right:5px;"/> <strong>github：<a target="_blank" rel="noopener" href="https://github.com/xiao252">https://github.com/xiao252</a></strong></p>
-<p><img src="./email.svg" width="30" align='left' style="margin-right:5px;"/> <strong>邮箱：<a href="mailto:&#x6c;&#x79;&#x6f;&#110;&#x68;&#x73;&#105;&#x61;&#111;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#x6c;&#x79;&#x6f;&#110;&#x68;&#x73;&#105;&#x61;&#111;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a></strong></p>
+  <p><img src="./github-fill.svg" width="30" align='left' style="margin-right:5px;"/> <strong>github：<a target="_blank" rel="noopener" href="https://github.com/xiao252">https://github.com/xiao252</a></strong></p>
+<p><img src="./email.svg" width="30" align='left' style="margin-right:5px;"/> <strong>邮箱：<a href="mailto:&#108;&#x79;&#x6f;&#x6e;&#x68;&#115;&#105;&#x61;&#111;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#108;&#x79;&#x6f;&#x6e;&#x68;&#115;&#105;&#x61;&#111;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a></strong></p>
 <hr>
 <p align=right style="color: red">@2022 created by LyonHsiao</p>
  
@@ -106,58 +106,59 @@
     
     <footer class="article-footer">
        
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/about.html" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
     </footer>
   </div>
 
    
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "OmbFKzWR9DKRKoMonoh3cJOn-gzGzoHsz",
+    app_key: "4tIsCmpRkErKoGweKtObDPaL",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
     
 </article>
 
@@ -190,8 +191,6 @@
     <ul>
       <li>
         <!-- cnzz统计 -->
-        
-        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
         
       </li>
     </ul>
