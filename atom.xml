@@ -6,7 +6,11 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
+<<<<<<< HEAD
   <updated>2026-02-04T11:28:44.820Z</updated>
+=======
+  <updated>2026-02-02T15:01:38.347Z</updated>
+>>>>>>> 9156f4e23862f745add81bc27b1b108162824da9
   <id>http://example.com/</id>
   
   <author>
@@ -17,6 +21,7 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+<<<<<<< HEAD
     <title>音乐识别下载器 v2.3.5</title>
     <link href="http://example.com/2026/02/04/music-down/v2-3-5/"/>
     <id>http://example.com/2026/02/04/music-down/v2-3-5/</id>
@@ -45,6 +50,8 @@
   </entry>
   
   <entry>
+=======
+>>>>>>> 9156f4e23862f745add81bc27b1b108162824da9
     <title>音乐识别下载器 v2.3.4</title>
     <link href="http://example.com/2026/02/02/music-down/v2-3-4/"/>
     <id>http://example.com/2026/02/02/music-down/v2-3-4/</id>
