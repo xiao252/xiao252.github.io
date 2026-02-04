@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-05-07T11:11:00.930Z</updated>
+  <updated>2026-02-04T11:28:44.820Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>音乐识别下载器 v2.3.5</title>
+    <link href="http://example.com/2026/02/04/music-down/v2-3-5/"/>
+    <id>http://example.com/2026/02/04/music-down/v2-3-5/</id>
+    <published>2026-02-03T16:00:00.000Z</published>
+    <updated>2026-02-04T11:28:44.820Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;修复检索模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装包文件：&lt;a href=&quot;https://pan.baidu.com/s/1d6Pdyh97YJech42OuaZYdA?pwd=grpv&quot;&gt;百度云&lt;/a&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="插件" scheme="http://example.com/categories/%E6%8F%92%E4%BB%B6/"/>
+    
+    
+    <category term="插件" scheme="http://example.com/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>音乐识别下载器 v2.3.4</title>
+    <link href="http://example.com/2026/02/02/music-down/v2-3-4/"/>
+    <id>http://example.com/2026/02/02/music-down/v2-3-4/</id>
+    <published>2026-02-01T16:00:00.000Z</published>
+    <updated>2026-02-02T15:01:38.347Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;修复无法播放、下载问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装包文件：&lt;a href=&quot;https://pan.baidu.com/s/11RmDo9dyDCnWmFROh1klOg?pwd=cm5b&quot;&gt;百度云&lt;/a&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="插件" scheme="http://example.com/categories/%E6%8F%92%E4%BB%B6/"/>
+    
+    
+    <category term="插件" scheme="http://example.com/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>音乐识别下载器 v2.3.1</title>
