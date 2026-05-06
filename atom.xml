@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2026-04-28T14:46:26.602Z</updated>
+  <updated>2026-05-06T14:48:00.293Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>音乐识别下载器 v2.3.7</title>
+    <link href="http://example.com/2026/05/06/music-down/v2-3-7/"/>
+    <id>http://example.com/2026/05/06/music-down/v2-3-7/</id>
+    <published>2026-05-05T16:00:00.000Z</published>
+    <updated>2026-05-06T14:48:00.293Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;修复检索模式&lt;/li&gt;
+&lt;li&gt;最近检索模式不太稳定版本更新可能比较频繁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装包文件：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="插件" scheme="http://example.com/categories/%E6%8F%92%E4%BB%B6/"/>
+    
+    
+    <category term="插件" scheme="http://example.com/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>音乐识别下载器 v2.3.6</title>
